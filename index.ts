@@ -11,15 +11,13 @@ import { sendEmail } from './sendMail';
         const channel = await connection.createChannel();
         const queue = 'my_queue';
 
-        // Define the queue stream
-        // Mandatory: exclusive: false, durable: true, autoDelete: false
         await channel.assertQueue(queue, {
             exclusive: false,
             durable: true,
             autoDelete: false,
             arguments: {
-                'x-queue-type': 'stream',  // Mandatory to define stream queue
-                'x-max-length-bytes': 2_000_000_000  // Set the queue retention to 2GB else the stream doesn't have any limit
+                'x-queue-type': 'stream',  
+                'x-max-length-bytes': 2_000_000_000 
             }
         });
 
